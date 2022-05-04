@@ -46,4 +46,42 @@ const createCollege = async function (req, res) {
         res.status(500).send({ status: false, msg: error.message })
     }
 }
-module.exports.createCollege=createCollege
+module.exports.createCollege = createCollege
+
+
+
+const getIntern = async function (req, res) {
+
+    try {
+
+        let body = req.query
+        if (!validators.isValidRequestBody(body)) {
+            return res.status(400).send({ status: false, msg: "pls provide valid query to fetch details" })
+
+        }
+
+        else {
+            let collegeName = req.query.collegeName
+            if (!validators.isValid(collegeName)) {
+                return res.status(400).send({ status: false, msg: "pls provide the college name" })
+            }
+
+ 
+
+
+
+        }
+
+
+
+
+
+    }
+    catch (error) {
+        console.log(error)
+        res.status(400).send({ status: false, msg: error.message })
+    }
+}
+
+
+
