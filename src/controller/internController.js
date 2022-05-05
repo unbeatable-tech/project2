@@ -12,7 +12,7 @@ const createIntern = async function (req, res) {
         }
         else {
 
-const{name,email,collegeName,collegeId,mobile}=data
+const{name,email,collegeName,mobile}=data
 
             if (!validator.isValid(name)) {
                 return res.status(400).send({ status: false, msg: "name is missing" })
@@ -27,9 +27,7 @@ const{name,email,collegeName,collegeId,mobile}=data
             if (!validator.isValid(mobile)) {
                 return res.status(400).send({ status: false, msg: "mobile number is missing" })
             }
-            if (!validator.isValid(collegeId)) {
-                return res.status(400).send({ status: false, msg: "college Id is missing" })
-            }
+            
 
             //eamil validations using REGEX
 
@@ -59,20 +57,15 @@ const{name,email,collegeName,collegeId,mobile}=data
                 return res.status(400).send({ status: false, msg: "MOBile number is already used" })
             }
 
-            // for college id validation
-            if (!validator.isValidObjectId(collegeId)) {
-                return res.status(400).send({ status: false, message: "pls enter a valid college Id" })
-            }
+            
 
 
        
            
             
 
-            let college = await collegeModel.findById({ _id: collegeId })
-            if (!college) {
-                return res.status(400).send({ status: false, msg: "No such college exist" })
-            }
+       
+            
             let internCollege=await collegeModel.findOne({name:collegeName})
             if(!internCollege){
                 return res.status(400).send({status:false,msg:`${collegeName} is not exist`})
