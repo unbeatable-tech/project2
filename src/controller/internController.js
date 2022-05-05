@@ -65,7 +65,8 @@ const{name,email,collegeName,collegeId,mobile}=data
             }
 
 
-            let intern = await internModel.findOne({ name: name, email: email, mobile: mobile })
+       
+           
             
 
             let college = await collegeModel.findById({ _id: collegeId })
