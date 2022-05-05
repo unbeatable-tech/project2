@@ -23,8 +23,6 @@ const createCollege = async function (req, res) {
                 return res.status(400).send({ status: false, msg: "please enter a  name" })
             }
 
-
-
             if (!validator.isValid(fullName)) {
                 return res.status(400).send({ status: false, msg: "please enter a  fullname" })
             }
@@ -87,10 +85,10 @@ const getIntern = async function (req, res) {
                 let name = college.name
                 let fullName = college.fullName
                 let logoLink = college.logoLink
-             
+
 
                 let interns = await internModel.find({ collegeId: checkId, isDeletd: false }).select({ _id: 1, name: 1, email: 1, mobile: 1 })
-          
+
                 console.log("checkId", checkId)
 
                 if (!interns.length > 0) {

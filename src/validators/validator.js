@@ -1,25 +1,22 @@
-const mongoose=require('mongoose')
+const mongoose = require('mongoose')
 //validations checking function
 
 
-const isValid=function(value){
- if(typeof value==='undefined'||value===null) return false
- if(typeof value ==='string' && value.trim().length===0) return false
+const isValid = function (value) {
+    if (typeof value === 'undefined' || value === null) return false
+    if (typeof value === 'string' && value.trim().length === 0) return false
 
- return true;
-
-
-
+    return true;
 
 }
-const isValidRequestBody=function(requestBody){
-    return Object.keys(requestBody).length>0
+const isValidRequestBody = function (requestBody) {
+    return Object.keys(requestBody).length > 0
 }
 
-const isValidObjectId=function(ObjectId){
-    return  mongoose.Types.ObjectId.isValid(ObjectId)
+const isValidObjectId = function (ObjectId) {
+    return mongoose.Types.ObjectId.isValid(ObjectId)
 }
 
 
 
-module.exports={isValid,isValidRequestBody,isValidObjectId}
+module.exports = { isValid, isValidRequestBody, isValidObjectId }
