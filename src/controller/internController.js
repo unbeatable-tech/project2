@@ -66,9 +66,7 @@ const{name,email,collegeName,collegeId,mobile}=data
 
 
             let intern = await internModel.findOne({ name: name, email: email, mobile: mobile })
-            // if (intern.collegeId === data.collegeId) {
-            //     return res.status(400).send({ status: false, msg: "you have already apply for this college" })
-            // }
+            
 
             let college = await collegeModel.findById({ _id: collegeId })
             if (!college) {
