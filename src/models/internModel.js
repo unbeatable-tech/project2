@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const { stringify } = require('querystring');
 const ObjectId = mongoose.Schema.Types.ObjectId
 
 const internSchema = new mongoose.Schema({
@@ -7,28 +8,10 @@ const internSchema = new mongoose.Schema({
 
     name: { type: String, required: "name is required" },
     email: {
-        type: String,
-        validate: {
-            validator: function (email) {
-                return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
-            },
-            message: "please Add valid email id ",
-            required: "pls add email id ",
-            unique: true,
-            isAsync: false
-        }
+        type:String,unique:true,trim:true,required:true
     },
     mobile: {
-        type: Number,
-        validate: {
-            validator: function (mobile) {
-                return /^(\+\d{1,3}[- ]?)?\d{10}$/.test(mobile)
-            },
-            message: "pls add valid mobile number",
-            required: "pls add number",
-            unique: true,
-            isAsync: false
-        },
+        type:String,unique:true,trim:true,required:true
     },
     collegeId: {
         type: ObjectId,
