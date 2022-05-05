@@ -1,5 +1,5 @@
 const collegeModel = require('../models/collegeModel')
-const internModel=require('../models/internModel')
+const internModel = require('../models/internModel')
 const validator = require('../validators/validator')
 const { default: mongoose } = require("mongoose");
 
@@ -13,7 +13,7 @@ const createIntern = async function (req, res) {
         else {
 
             //using destruction
-            const { name, collegeName, email, mobile } = data
+            const { name, collegeName, email, mobile, collegeId } = data
             if (!validator.isValid(name)) {
                 return res.status(400).send({ status: false, msg: "name is missing" })
             }
@@ -27,7 +27,9 @@ const createIntern = async function (req, res) {
             if (!validator.isValid(mobile)) {
                 return res.status(400).send({ status: false, msg: "mobile number is missing" })
             }
-
+            if (!validator.isValid(collegeId)) {
+                return res.status(400).send({ status: false, msg: "college Id is missing" })
+            }
 
             //eamil validations using REGEX
 
@@ -59,10 +61,11 @@ const createIntern = async function (req, res) {
 
 
 
-//save data in database
+            //save data in database
 
-let saveData=await internModel.create(data)
-res.status(200).send({status:true,msg:` internship applied suceesfully at ${collegeName}`,data:saveData})
+            let saveData = await internModel.create(data)
+            console.log(saveData)
+            res.status(200).send({ status: true, msg: ` internship applied suceesfully at ${collegeName}`, data: saveData })
         }
 
 
@@ -72,4 +75,4 @@ res.status(200).send({status:true,msg:` internship applied suceesfully at ${coll
         res.status(400).send({ status: false, msg: error.message })
     }
 }
-module.exports.createIntern=createIntern
+module.exports.createIntern = createIntern
