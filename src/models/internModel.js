@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { stringify } = require('querystring');
+
 const ObjectId = mongoose.Schema.Types.ObjectId
 
 const internSchema = new mongoose.Schema({
