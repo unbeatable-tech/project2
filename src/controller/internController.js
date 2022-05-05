@@ -12,8 +12,8 @@ const createIntern = async function (req, res) {
         }
         else {
 
-            //using destruction
-            const { name, collegeName, email, mobile, collegeId } = data
+const{name,email,collegeName,collegeId,mobile}=data
+
             if (!validator.isValid(name)) {
                 return res.status(400).send({ status: false, msg: "name is missing" })
             }
@@ -59,7 +59,25 @@ const createIntern = async function (req, res) {
                 return res.status(400).send({ status: false, msg: "MOBile number is already used" })
             }
 
+            // for college id validation
+            if (!validator.isValidObjectId(collegeId)) {
+                return res.status(400).send({ status: false, message: "pls enter a valid college Id" })
+            }
 
+
+            let intern = await internModel.findOne({ name: name, email: email, mobile: mobile })
+            // if (intern.collegeId === data.collegeId) {
+            //     return res.status(400).send({ status: false, msg: "you have already apply for this college" })
+            // }
+
+            let college = await collegeModel.findById({ _id: collegeId })
+            if (!college) {
+                return res.status(400).send({ status: false, msg: "No such college exist" })
+            }
+            let internCollege=await collegeModel.findOne({name:collegeName})
+            if(!internCollege){
+                return res.status(400).send({status:false,msg:`${collegeName} is not exist`})
+            }
 
             //save data in database
 

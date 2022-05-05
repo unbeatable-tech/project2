@@ -1,4 +1,3 @@
-const { cookie } = require('express/lib/response')
 const collegeModel = require('../models/collegeModel')
 const internModel = require('../models/internModel')
 
@@ -41,8 +40,8 @@ const createCollege = async function (req, res) {
 
             ///***********************************************logo link validation**************** */
             if (!(/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/.test(logoLink))) {
-                res.status(400).send({ status: false, message: `logoLink is not a valid URL` })
-                return
+                return res.status(400).send({ status: false, message: `logoLink is not a valid URL` })
+
             }
 
             let saveData = await collegeModel.create(data)
@@ -88,9 +87,11 @@ const getIntern = async function (req, res) {
                 let name = college.name
                 let fullName = college.fullName
                 let logoLink = college.logoLink
-
+             
 
                 let interns = await internModel.find({ collegeId: checkId, isDeletd: false }).select({ _id: 1, name: 1, email: 1, mobile: 1 })
+          
+                console.log("checkId", checkId)
 
                 if (!interns.length > 0) {
 
@@ -113,19 +114,19 @@ const getIntern = async function (req, res) {
                         interests: interns,
                     }
                     res.status(200).send({
-                        status: true, message: "Succesfully fetched all interns details of ${fullName}", data: data
+                        status: true, message: `Succesfully fetched all interns details of ${fullName}`, data: data
                     })
                 }
             }
 
         }
 
-        }
-    catch (error) {
-            console.log(error)
-            res.status(400).send({ status: false, msg: error.message })
-        }
     }
+    catch (error) {
+        console.log(error)
+        res.status(400).send({ status: false, msg: error.message })
+    }
+}
 
 
 
