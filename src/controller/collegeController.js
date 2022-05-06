@@ -43,7 +43,7 @@ const createCollege = async function (req, res) {
             }
 
             let saveData = await collegeModel.create(data)
-            let find= await collegeModel.find({name:saveData.name,fullName:saveData.fullName}).select({name:1,fullName:1,logoLink:1,isDeleted:1})
+            let find= await collegeModel.findOne({name:saveData.name,fullName:saveData.fullName}).select({name:1,fullName:1,logoLink:1,isDeleted:1})
             
             return res.status(201).send({ status:true, data: find })
         }

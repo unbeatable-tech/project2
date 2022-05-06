@@ -70,7 +70,7 @@ const createIntern = async function (req, res) {
             data["collegeId"] = collegeId
 
             let saveData = await internModel.create(data)
-            let find=await internModel.find({name:saveData.name,email:saveData.email}).select({name:1, email:1,mobile:1,collegeId:1,isDeleted:1,_id:0})
+            let find=await internModel.findOne({name:saveData.name,email:saveData.email}).select({name:1, email:1,mobile:1,collegeId:1,isDeleted:1,_id:0})
             
             res.status(201).send({ status: true,  data: find })
         }
