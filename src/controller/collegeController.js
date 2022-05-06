@@ -15,7 +15,7 @@ const createCollege = async function (req, res) {
             return res.status(400).send({ status: false, msg: "No college details given" })
         }
         else {
-            // Using object destruction method here
+            // Using object destructer method here
 
             const { name, fullName, logoLink } = data
 

@@ -58,7 +58,7 @@ const createIntern = async function (req, res) {
             }
             let internCollege = await collegeModel.findOne({ name: collegeName })
             if (!internCollege) {
-                return res.status(400).send({ status: false, msg: `${collegeName} is not exist` })
+                return res.status(400).send({ status: false, msg: `${collegeName}  is not exist` })
             }
 
             //save data in database
