@@ -43,7 +43,9 @@ const createCollege = async function (req, res) {
             }
 
             let saveData = await collegeModel.create(data)
-            return res.status(201).send({ status: false, msg: "Data created sucessfully", data: saveData })
+            let find= await collegeModel.find({name:name,fullName:fullName}).select({name:1,fullName:1,logoLink:1,isDeleted:1,_id:0})
+            
+            return res.status(201).send({ status: false, msg: "Data created sucessfully", data: find })
         }
 
     }
