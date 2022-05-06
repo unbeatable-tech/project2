@@ -43,9 +43,9 @@ const createCollege = async function (req, res) {
             }
 
             let saveData = await collegeModel.create(data)
-            let find= await collegeModel.find({name:name,fullName:fullName}).select({name:1,fullName:1,logoLink:1,isDeleted:1,_id:0})
+            let find= await collegeModel.find({name:saveData.name,fullName:saveData.fullName}).select({name:1,fullName:1,logoLink:1,isDeleted:1})
             
-            return res.status(201).send({ status: false, msg: "Data created sucessfully", data: find })
+            return res.status(201).send({ status:true, data: find })
         }
 
     }
@@ -91,7 +91,7 @@ const getIntern = async function (req, res) {
 
                 let interns = await internModel.find({ collegeId: checkId, isDeletd: false }).select({ _id: 1, name: 1, email: 1, mobile: 1 })
 
-                console.log("checkId", checkId)
+             
 
                 if (!interns.length > 0) {
 
@@ -104,7 +104,7 @@ const getIntern = async function (req, res) {
                         interests: `No interns applied for ${fullName}`
 
                     }
-                    return res.status(201).send({ status: true, data: data })
+                    return res.status(200).send({ status: true, data: data })
                 }
                 else {
                     let data = {
@@ -113,7 +113,7 @@ const getIntern = async function (req, res) {
                         logoLink: logoLink,
                         interests: interns,
                     }
-                    res.status(201).send({
+                    res.status(200).send({
                         status: true, message: `Succesfully fetched all interns details of ${fullName}`, data: data
                     })
                 }
@@ -124,7 +124,7 @@ const getIntern = async function (req, res) {
     }
     catch (error) {
         console.log(error)
-        res.status(400).send({ status: false, msg: error.message })
+        res.status(500).send({ status: false, msg: error.message })
     }
 }
 
