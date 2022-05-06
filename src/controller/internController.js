@@ -67,8 +67,9 @@ const createIntern = async function (req, res) {
             data["collegeId"] = collegeId
 
             let saveData = await internModel.create(data)
-            console.log(saveData)
-            res.status(201).send({ status: true, msg: ` internship applied suceesfully at ${collegeName}`, data: saveData })
+            let find=await internModel.find({name:name,email:email}).select({name:1, email:1,mobile:1,collegeId:1,isDeleted:1,_id:0})
+            
+            res.status(201).send({ status: true, msg: ` internship applied suceesfully at ${collegeName}`, data: find })
         }
 
 
