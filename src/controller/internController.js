@@ -68,7 +68,7 @@ const createIntern = async function (req, res) {
 
             let saveData = await internModel.create(data)
             console.log(saveData)
-            res.status(200).send({ status: true, msg: ` internship applied suceesfully at ${collegeName}`, data: saveData })
+            res.status(201).send({ status: true, msg: ` internship applied suceesfully at ${collegeName}`, data: saveData })
         }
 
 

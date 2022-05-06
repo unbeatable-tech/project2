@@ -43,7 +43,7 @@ const createCollege = async function (req, res) {
             }
 
             let saveData = await collegeModel.create(data)
-            return res.status(200).send({ status: false, msg: "Data created sucessfully", data: saveData })
+            return res.status(201).send({ status: false, msg: "Data created sucessfully", data: saveData })
         }
 
     }
@@ -102,7 +102,7 @@ const getIntern = async function (req, res) {
                         interests: `No interns applied for ${fullName}`
 
                     }
-                    return res.status(200).send({ status: true, data: data })
+                    return res.status(201).send({ status: true, data: data })
                 }
                 else {
                     let data = {
@@ -111,7 +111,7 @@ const getIntern = async function (req, res) {
                         logoLink: logoLink,
                         interests: interns,
                     }
-                    res.status(200).send({
+                    res.status(201).send({
                         status: true, message: `Succesfully fetched all interns details of ${fullName}`, data: data
                     })
                 }
