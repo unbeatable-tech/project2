@@ -91,7 +91,7 @@ const getIntern = async function (req, res) {
 
                 let interns = await internModel.find({ collegeId: checkId, isDeletd: false }).select({ _id: 1, name: 1, email: 1, mobile: 1 })
 
-             
+            
 
                 if (!interns.length > 0) {
 
